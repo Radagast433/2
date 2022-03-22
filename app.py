@@ -6,10 +6,10 @@ import numpy as np
 import time
 
 # Encienda la cámara ip
-video = "rtsp://admin:admin2018@192.168.14.123"  # http: // admin: admin @     Dirección /
+#video = "rtsp://admin:admin2018@192.168.14.123"  # http: // admin: admin @     Dirección /
 #video = "rtsp://admin:admin@192.168.14.122"
-cap = cv2.VideoCapture(video)
-#capture = cv2.VideoCapture((0)
+#cap = cv2.VideoCapture(video)
+capture = cv2.VideoCapture(0)
 
 thres = 0.58 # Threshold to detect object
 nms_threshold = 0.15
