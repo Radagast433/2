@@ -11,8 +11,8 @@ video = "rtsp://admin:admin2018@192.168.14.123"  # http: // admin: admin @     D
 cap = cv2.VideoCapture(video)
 #capture = cv2.VideoCapture((0)
 
-thres = 0.48 # Threshold to detect object
-nms_threshold = 0.2
+thres = 0.58 # Threshold to detect object
+nms_threshold = 0.15
 #cap = cv2.VideoCapture(0)
 #cap = cv2.VideoCapture(video)
 # cap.set(3,1280)
@@ -29,14 +29,14 @@ configPath = 'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
 weightsPath = 'frozen_inference_graph.pb'
 
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
-net.setInputSize(320,320)
+net.setInputSize(300,300)
 net.setInputScale(1.0/ 127.5)
 net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
 while True:
     success,img = cap.read()
-    img = imutils.resize(img, width = 800, height = 600)
+    img = imutils.resize(img, width = 900, height = 700)
     classIds, confs, bbox = net.detect(img,confThreshold=thres)
     classIds = list(classIds)
     bbox = list(bbox)
@@ -57,7 +57,7 @@ while True:
             x,y,w,h = box[0],box[1],box[2],box[3]
             cv2.rectangle(img, (x,y),(x+w,h+y), color=(0, 255, 0), thickness=2)
             
-            cv2.putText(img,classNames[int(classIds[i])-1].upper(),(int(box[0])+10,int(box[1])+30), cv2.FONT_HERSHEY_COMPLEX,0.5,(0,255,0),1)
+            cv2.putText(img,classNames[int(classIds[i]) - 1].upper(),(int(box[0])+10,int(box[1])+31), cv2.FONT_HERSHEY_COMPLEX,0.5,(0,255,0),1)
         
         except:
             pass
